@@ -2,7 +2,7 @@
 <html>
 
 <head>
- 
+
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="generator" content="Mobirise AI v0.01, ai.mobirise.com">
@@ -729,7 +729,7 @@
       <div class="container">
         <div class="navbar-brand">
           <span class="navbar-logo">
-            <a href="https://mobiri.se">
+            <a href="#">
               <img src="assets/images/photo-1488190211105-8b0e65b80b4e.jpeg" style="height: 4.3rem;">
             </a>
           </span>
@@ -748,7 +748,7 @@
           </div>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          
+
           <div class="navbar-buttons mbr-section-btn">
             <a class="btn btn-primary display-4" href="#">WELCOME!</a>
           </div>
@@ -840,6 +840,11 @@
         margin-bottom: 1rem;
       }
     }
+
+
+    canvas {
+    display: none; /* Hide the canvas */
+  }
   </style>
   <section class="features032 cid-u6OuRCd6Br mbr-parallax-background" id="features-33-u6OuRCd6Br">
     <div class="container">
@@ -855,17 +860,64 @@
               </h5>
               <p class="card-text mbr-fonts-style display-7">
                 Explore Corel Draw Notes</p>
-                <div class="navbar-buttons mbr-section-btn">
-                  <a target="asdfghjk" class="btn btn-primary display-4" href="corel.html">Course Notes</a>
-                </div>
+              <div class="navbar-buttons mbr-section-btn">
+                <a target="asdfghjk" class="btn btn-primary display-4" href="corel.html">Course Notes</a>
+              </div>
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
   </section>
-  
+
+  <div class="row justify-content-center">
+    <div class="col-12 content-head">
+      <div class="mbr-section-head mt-5 mb-5">
+        <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
+          <strong>Image Convertor</strong>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <section class="features032 cid-u6OuRCd6Br mbr-parallax-background" id="features-33-u6OuRCd6Br">
+    <div class="container">
+      <div class="row justify-content-center">
+
+      </div>
+      <div id="cd" class="row " style="margin-top: 100px;">
+        <div class="item features-without-image col-12 col-lg-4 active item-mb">
+          <div class="item-wrapper">
+            <div class="card-box align-left">
+              <!-- <h5 class="card-title mbr-fonts-style display-5">
+                <strong>Corel Draw Notes</strong>
+              </h5>
+              <p class="card-text mbr-fonts-style display-7">
+                Explore Corel Draw Notes</p>
+                <div class="navbar-buttons mbr-section-btn">
+                  <a target="asdfghjk" class="btn btn-primary display-4" href="corel.html">Course Notes</a>
+                </div> -->
+                <center>
+
+                  <h2>
+                    JPG TO PNG 
+                  </h2>
+                  <br><br>
+                  <input style="margin-left: 40px;" type="file" accept="image/jpeg" id="fileInput">
+                </center>
+              <br><br>
+              <button class="btn btn-primary display-4" onclick="convertToPNG()">Convert to PNG</button>
+
+              <canvas id="canvas"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <style>
     .cid-u6OuRCgy6d {
       padding-top: 6rem;
@@ -927,6 +979,9 @@
   </style>
   <section class="contacts01 cid-u6OuRCgy6d" id="contacts-1-u6OuRCgy6d">
     <div class="container">
+
+
+
       <div class="row justify-content-center">
         <div class="col-12 content-head">
           <div class="mbr-section-head mb-5">
@@ -936,11 +991,48 @@
           </div>
         </div>
       </div>
-      
-      
+
+
     </div>
   </section>
- 
+
+  
+<script>
+  function convertToPNG() {
+      const fileInput = document.getElementById('fileInput');
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+  
+      const file = fileInput.files[0];
+      if (!file) {
+          alert('Please select a file!');
+          return;
+      }
+  
+      if (!file.type.match('image/jpeg')) {
+          alert('Please select a JPEG image!');
+          return;
+      }
+  
+      const reader = new FileReader();
+      reader.onload = function(event) {
+          const img = new Image();
+          img.onload = function() {
+              canvas.width = img.width;
+              canvas.height = img.height;
+              ctx.drawImage(img, 0, 0);
+              const dataURL = canvas.toDataURL('image/png');
+              const link = document.createElement('a');
+              link.href = dataURL;
+              link.download = 'converted.png';
+              link.click();
+          };
+          img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+  }
+  </script>
+
 
   <script src="assets/parallax/jarallax.js"></script>
   <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
